@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 
 import { useLanguage } from "../hooks/useLanguage";
 import { getOrderRequest } from "../services/orderService";
+import { localizeProductNameFromText } from "../utils/catalogLocalization";
 import { formatCurrency, formatDate } from "../utils/formatters";
 
 const OrderDetailsPage = () => {
   const { id } = useParams();
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const OrderDetailsPage = () => {
               <div className="flex items-center gap-3">
                 <img alt={item.name} className="h-16 w-16 rounded-xl object-cover" src={item.image} />
                 <div>
-                  <p className="font-semibold text-slate-800">{item.name}</p>
+                  <p className="font-semibold text-slate-800">{localizeProductNameFromText(item.name, language)}</p>
                   <p className="text-sm text-slate-500">{item.quantity} x {formatCurrency(item.price)}</p>
                 </div>
               </div>

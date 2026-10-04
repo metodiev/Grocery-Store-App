@@ -8,12 +8,13 @@ import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
 import { useLanguage } from "../hooks/useLanguage";
 import { getProductRequest } from "../services/productService";
+import { localizeCategoryName, localizeProduct } from "../utils/catalogLocalization";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
   const { isAuthenticated } = useAuth();
   const { addToCart } = useCart();
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -40,19 +41,21 @@ const ProductDetailsPage = () => {
     return <p className="text-center text-red-500">{t("productNotFound")}</p>;
   }
 
+  const localizedProduct = localizeProduct(product, language);
+  const localizedCategoryName = localizeCategoryName(product.category, language);
   const outOfStock = product.stock <= 0;
 
   return (
     <div className="space-y-12">
       <section className="card grid gap-8 p-6 lg:grid-cols-2">
-        <img alt={product.name} className="h-[420px] w-full rounded-2xl object-cover" src={product.image} />
+        <img alt={localizedProduct.name} className="h-[420px] w-full rounded-2xl object-cover" src={localizedProduct.image} />
         <div className="space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand-primary">{product.category?.name}</p>
-          <h1 className="text-3xl font-extrabold text-slate-800">{product.name}</h1>
-          <p className="text-slate-600">{product.description}</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-primary">{localizedCategoryName}</p>
+          <h1 className="text-3xl font-extrabold text-slate-800">{localizedProduct.name}</h1>
+          <p className="text-slate-600">{localizedProduct.description}</p>
           <PriceDisplay className="text-2xl" price={product.price} discountPrice={product.discountPrice} />
           <p className={outOfStock ? "text-red-500" : "text-green-700"}>
-            {outOfStock ? t("outOfStock") : t("inStock", { stock: product.stock, unit: product.unit })}
+            {outOfStock ? t("outOfStock") : t("inStock", { stock: product.stock, unit: localizedProduct.unit })}
           </p>
           <div className="flex items-center gap-3">
             <label className="text-sm font-semibold text-slate-700" htmlFor="quantity">

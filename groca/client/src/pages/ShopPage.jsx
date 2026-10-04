@@ -6,9 +6,10 @@ import ProductGrid from "../components/ProductGrid";
 import { useLanguage } from "../hooks/useLanguage";
 import { getCategoriesRequest } from "../services/categoryService";
 import { getProductsRequest } from "../services/productService";
+import { localizeCategoryName } from "../utils/catalogLocalization";
 
 const ShopPage = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -70,7 +71,7 @@ const ShopPage = () => {
             <option value="">{t("allCategories")}</option>
             {categories.map((category) => (
               <option key={category.id} value={category.slug}>
-                {category.name}
+                {localizeCategoryName(category, language)}
               </option>
             ))}
           </select>

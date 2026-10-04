@@ -7,3 +7,20 @@
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
+11:29:35 am [vite] hmr update /src/components/CategoryCard.jsx, /src/index.css
+11:29:39 am [vite] hmr update /src/components/ProductCard.jsx, /src/index.css
+11:29:43 am [vite] hmr update /src/components/CartItem.jsx, /src/index.css
+11:29:52 am [vite] hmr update /src/pages/ShopPage.jsx, /src/index.css
+11:29:52 am [vite] hmr update /src/pages/ShopPage.jsx, /src/index.css
+11:29:52 am [vite] hmr update /src/pages/CategoryPage.jsx, /src/index.css
+11:29:52 am [vite] hmr update /src/pages/ProductDetailsPage.jsx, /src/index.css
+11:29:55 am [vite] hmr update /src/pages/OrderDetailsPage.jsx, /src/index.css
+11:29:59 am [vite] hmr update /src/components/CategoryCard.jsx, /src/index.css, /src/components/ProductCard.jsx, /src/components/CartItem.jsx, /src/pages/ShopPage.jsx, /src/pages/CategoryPage.jsx, /src/pages/ProductDetailsPage.jsx, /src/pages/OrderDetailsPage.jsx
+11:30:24 am [vite] hmr update /src/pages/CategoryPage.jsx, /src/index.css
+11:30:24 am [vite] hmr update /src/components/ProductCard.jsx, /src/index.css
+11:30:24 am [vite] hmr update /src/components/CategoryCard.jsx, /src/index.css
+11:30:24 am [vite] hmr update /src/pages/ShopPage.jsx, /src/index.css
+11:30:24 am [vite] hmr update /src/components/CartItem.jsx, /src/index.css
+11:30:24 am [vite] hmr update /src/pages/ProductDetailsPage.jsx, /src/index.css
+11:30:24 am [vite] hmr update /src/pages/OrderDetailsPage.jsx, /src/index.css
+11:30:24 am [vite] hmr update /src/components/CategoryCard.jsx, /src/index.css, /src/components/ProductCard.jsx, /src/components/CartItem.jsx, /src/pages/ShopPage.jsx, /src/pages/CategoryPage.jsx, /src/pages/ProductDetailsPage.jsx, /src/pages/OrderDetailsPage.jsx

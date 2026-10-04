@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ProductGrid from "../components/ProductGrid";
+import { useLanguage } from "../hooks/useLanguage";
 import { getProductsRequest } from "../services/productService";
+import { localizeCategoryName } from "../utils/catalogLocalization";
 
 const CategoryPage = () => {
   const { slug } = useParams();
+  const { language } = useLanguage();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,10 +26,7 @@ const CategoryPage = () => {
     fetchProducts();
   }, [slug]);
 
-  const title = slug
-    .split("-")
-    .map((item) => item.charAt(0).toUpperCase() + item.slice(1))
-    .join(" ");
+  const title = localizeCategoryName(slug, language);
 
   return <ProductGrid loading={loading} products={products} title={title} />;
 };

@@ -50,6 +50,11 @@ const productTemplates = [
   ["Canned Beans", "Protein rich canned beans", 1.99, 1.69, "can"]
 ];
 
+const productImageOverrides = {
+  tomatoes: "https://img.icons8.com/color/512/tomato.png",
+  "whole-milk": "https://img.icons8.com/color/512/milk-bottle.png"
+};
+
 async function main() {
   console.log("Seeding data...");
 
@@ -112,17 +117,19 @@ async function main() {
   for (let i = 0; i < productTemplates.length; i += 1) {
     const [name, description, price, discountPrice, unit] = productTemplates[i];
     const category = createdCategories[i % createdCategories.length];
+    const baseSlug = slugify(name, { lower: true, strict: true });
+    const image = productImageOverrides[baseSlug] || `https://picsum.photos/seed/groca-${i + 1}/800/600`;
 
     await prisma.product.create({
       data: {
         name,
-        slug: slugify(`${name}-${i + 1}`, { lower: true, strict: true }),
+        slug: `${baseSlug}-${i + 1}`,
         description,
         price,
         discountPrice,
         stock: 25 + i * 3,
         unit,
-        image: `https://picsum.photos/seed/groca-${i + 1}/800/600`,
+        image,
         isFeatured: i < 8,
         isActive: true,
         categoryId: category.id

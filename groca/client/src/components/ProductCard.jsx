@@ -5,29 +5,32 @@ import PriceDisplay from "./PriceDisplay";
 import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
 import { useLanguage } from "../hooks/useLanguage";
+import { localizeCategoryName, localizeProduct } from "../utils/catalogLocalization";
 
 const ProductCard = ({ product }) => {
   const { isAuthenticated } = useAuth();
   const { addToCart } = useCart();
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+  const localizedProduct = localizeProduct(product, language);
+  const localizedCategoryName = localizeCategoryName(product.category, language);
 
   const isOutOfStock = product.stock <= 0;
 
   return (
     <article className="card group overflow-hidden transition hover:-translate-y-1">
       <Link to={`/products/${product.id}`}>
-        <img alt={product.name} className="h-48 w-full object-cover" src={product.image} />
+        <img alt={localizedProduct.name} className="h-48 w-full object-cover" src={localizedProduct.image} />
       </Link>
       <div className="space-y-3 p-4">
-        <p className="text-xs font-semibold uppercase tracking-wide text-brand-primary">{product.category?.name}</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-brand-primary">{localizedCategoryName}</p>
         <Link className="line-clamp-1 text-base font-bold text-slate-800 group-hover:text-brand-dark" to={`/products/${product.id}`}>
-          {product.name}
+          {localizedProduct.name}
         </Link>
-        <p className="line-clamp-2 text-sm text-slate-500">{product.description}</p>
+        <p className="line-clamp-2 text-sm text-slate-500">{localizedProduct.description}</p>
         <div className="flex items-center justify-between">
           <PriceDisplay price={product.price} discountPrice={product.discountPrice} />
           <span className={`text-xs font-semibold ${isOutOfStock ? "text-red-500" : "text-green-700"}`}>
-            {isOutOfStock ? t("outOfStock") : t("inStock", { stock: product.stock, unit: product.unit })}
+            {isOutOfStock ? t("outOfStock") : t("inStock", { stock: product.stock, unit: localizedProduct.unit })}
           </span>
         </div>
         <button
