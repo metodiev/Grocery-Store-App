@@ -6,12 +6,14 @@ import PriceDisplay from "../components/PriceDisplay";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
+import { useLanguage } from "../hooks/useLanguage";
 import { getProductRequest } from "../services/productService";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
   const { isAuthenticated } = useAuth();
   const { addToCart } = useCart();
+  const { t } = useLanguage();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -35,7 +37,7 @@ const ProductDetailsPage = () => {
   }
 
   if (!product) {
-    return <p className="text-center text-red-500">Product not found.</p>;
+    return <p className="text-center text-red-500">{t("productNotFound")}</p>;
   }
 
   const outOfStock = product.stock <= 0;
@@ -50,11 +52,11 @@ const ProductDetailsPage = () => {
           <p className="text-slate-600">{product.description}</p>
           <PriceDisplay className="text-2xl" price={product.price} discountPrice={product.discountPrice} />
           <p className={outOfStock ? "text-red-500" : "text-green-700"}>
-            {outOfStock ? "Out of stock" : `In stock: ${product.stock} ${product.unit}`}
+            {outOfStock ? t("outOfStock") : t("inStock", { stock: product.stock, unit: product.unit })}
           </p>
           <div className="flex items-center gap-3">
             <label className="text-sm font-semibold text-slate-700" htmlFor="quantity">
-              Quantity
+              {t("quantity")}
             </label>
             <input
               className="input w-24"
@@ -72,12 +74,12 @@ const ProductDetailsPage = () => {
             onClick={() => addToCart(product.id, quantity)}
             type="button"
           >
-            {isAuthenticated ? "Add to cart" : "Login to add"}
+            {isAuthenticated ? t("addToCart") : t("loginToAdd")}
           </button>
         </div>
       </section>
 
-      <ProductGrid loading={false} products={product.relatedProducts || []} title="Related products" />
+      <ProductGrid loading={false} products={product.relatedProducts || []} title={t("relatedProducts")} />
     </div>
   );
 };

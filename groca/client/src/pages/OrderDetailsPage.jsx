@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { useLanguage } from "../hooks/useLanguage";
 import { getOrderRequest } from "../services/orderService";
 import { formatCurrency, formatDate } from "../utils/formatters";
 
 const OrderDetailsPage = () => {
   const { id } = useParams();
+  const { t } = useLanguage();
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
@@ -13,20 +15,20 @@ const OrderDetailsPage = () => {
   }, [id]);
 
   if (!order) {
-    return <p>Loading order...</p>;
+    return <p>{t("loadingOrder")}</p>;
   }
 
   return (
     <div className="space-y-5">
       <section className="card p-6">
-        <h1 className="text-2xl font-bold text-slate-800">Order details</h1>
-        <p className="mt-2 text-sm text-slate-600">Placed on {formatDate(order.createdAt)}</p>
-        <p className="mt-1 text-sm text-slate-600">Status: <span className="font-semibold text-brand-dark">{order.status}</span></p>
-        <p className="mt-1 text-sm text-slate-600">Payment: {order.paymentMethod} ({order.paymentStatus})</p>
+        <h1 className="text-2xl font-bold text-slate-800">{t("orderDetails")}</h1>
+        <p className="mt-2 text-sm text-slate-600">{t("placedOn", { date: formatDate(order.createdAt) })}</p>
+        <p className="mt-1 text-sm text-slate-600">{t("status")}: <span className="font-semibold text-brand-dark">{order.status}</span></p>
+        <p className="mt-1 text-sm text-slate-600">{t("payment", { method: order.paymentMethod, status: order.paymentStatus })}</p>
       </section>
 
       <section className="card p-6">
-        <h2 className="mb-4 text-lg font-bold text-slate-800">Items</h2>
+        <h2 className="mb-4 text-lg font-bold text-slate-800">{t("items")}</h2>
         <div className="space-y-3">
           {order.items.map((item) => (
             <div className="flex items-center justify-between border-b border-slate-100 pb-3" key={item.id}>

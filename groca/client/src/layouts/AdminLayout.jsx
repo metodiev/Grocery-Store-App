@@ -11,8 +11,8 @@ const links = [
 
 const AdminLayout = () => {
   return (
-    <div className="grid min-h-screen lg:grid-cols-[260px_1fr]">
-      <aside className="border-r border-green-100 bg-white p-6">
+    <div className="admin-shell grid min-h-screen lg:grid-cols-[260px_1fr]">
+      <aside className="admin-aside border-r p-6">
         <Link className="text-2xl font-extrabold text-brand-dark" to="/">
           Groca Admin
         </Link>
@@ -22,8 +22,8 @@ const AdminLayout = () => {
             return (
               <NavLink
                 className={({ isActive }) =>
-                  `flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold ${
-                    isActive ? "bg-green-50 text-brand-dark" : "text-slate-600 hover:bg-green-50"
+                  `admin-nav-item flex items-center gap-2 px-3 py-2 text-sm font-semibold ${
+                    isActive ? "admin-nav-item-active text-brand-dark" : "text-slate-600"
                   }`
                 }
                 key={link.to}
@@ -36,7 +36,7 @@ const AdminLayout = () => {
           })}
         </nav>
       </aside>
-      <main className="bg-brand-bg p-6 lg:p-10">
+      <main className="p-6 lg:p-10">
         <Outlet />
       </main>
     </div>

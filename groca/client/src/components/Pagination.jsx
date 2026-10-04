@@ -1,4 +1,8 @@
+import { useLanguage } from "../hooks/useLanguage";
+
 const Pagination = ({ page, totalPages, onChange }) => {
+  const { t } = useLanguage();
+
   if (totalPages <= 1) {
     return null;
   }
@@ -11,10 +15,10 @@ const Pagination = ({ page, totalPages, onChange }) => {
         onClick={() => onChange(page - 1)}
         type="button"
       >
-        Prev
+        {t("prev")}
       </button>
       <span className="text-sm font-semibold text-slate-700">
-        Page {page} / {totalPages}
+        {t("pageOf", { page, totalPages })}
       </span>
       <button
         className="rounded-lg border border-slate-200 px-3 py-2 text-sm disabled:opacity-50"
@@ -22,7 +26,7 @@ const Pagination = ({ page, totalPages, onChange }) => {
         onClick={() => onChange(page + 1)}
         type="button"
       >
-        Next
+        {t("next")}
       </button>
     </div>
   );

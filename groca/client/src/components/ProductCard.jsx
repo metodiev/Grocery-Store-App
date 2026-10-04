@@ -4,10 +4,12 @@ import { ShoppingCart } from "lucide-react";
 import PriceDisplay from "./PriceDisplay";
 import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
+import { useLanguage } from "../hooks/useLanguage";
 
 const ProductCard = ({ product }) => {
   const { isAuthenticated } = useAuth();
   const { addToCart } = useCart();
+  const { t } = useLanguage();
 
   const isOutOfStock = product.stock <= 0;
 
@@ -25,7 +27,7 @@ const ProductCard = ({ product }) => {
         <div className="flex items-center justify-between">
           <PriceDisplay price={product.price} discountPrice={product.discountPrice} />
           <span className={`text-xs font-semibold ${isOutOfStock ? "text-red-500" : "text-green-700"}`}>
-            {isOutOfStock ? "Out of stock" : `${product.stock} ${product.unit}`}
+            {isOutOfStock ? t("outOfStock") : t("inStock", { stock: product.stock, unit: product.unit })}
           </span>
         </div>
         <button
@@ -35,7 +37,7 @@ const ProductCard = ({ product }) => {
           type="button"
         >
           <ShoppingCart className="h-4 w-4" />
-          {isAuthenticated ? "Add to cart" : "Login to add"}
+          {isAuthenticated ? t("addToCart") : t("loginToAdd")}
         </button>
       </div>
     </article>

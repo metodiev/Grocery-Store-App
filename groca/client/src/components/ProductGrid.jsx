@@ -1,8 +1,11 @@
 import ProductCard from "./ProductCard";
 import SkeletonCard from "./ui/SkeletonCard";
 import EmptyState from "./ui/EmptyState";
+import { useLanguage } from "../hooks/useLanguage";
 
 const ProductGrid = ({ products, loading, title = "Products" }) => {
+  const { t } = useLanguage();
+
   return (
     <section className="space-y-5">
       <div className="flex items-center justify-between">
@@ -21,7 +24,7 @@ const ProductGrid = ({ products, loading, title = "Products" }) => {
           ))}
         </div>
       ) : (
-        <EmptyState title="No products found" description="Try updating your filters or search query." />
+        <EmptyState title={t("noProductsFound")} description={t("tryUpdatingFilters")} />
       )}
     </section>
   );

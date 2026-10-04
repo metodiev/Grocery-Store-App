@@ -8,10 +8,12 @@ import {
   removeCartItemRequest,
   updateCartItemRequest
 } from "../services/cartService";
+import { useLanguage } from "../hooks/useLanguage";
 
 export const CartContext = createContext(null);
 
 export const CartProvider = ({ children, isAuthenticated }) => {
+  const { t } = useLanguage();
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +27,7 @@ export const CartProvider = ({ children, isAuthenticated }) => {
       const freshCart = await getCartRequest();
       setCart(freshCart);
     } catch (_error) {
-      toast.error("Unable to load cart");
+      toast.error(t("toastCartLoadError"));
     } finally {
       setLoading(false);
     }
@@ -38,7 +40,7 @@ export const CartProvider = ({ children, isAuthenticated }) => {
   const addToCart = async (productId, quantity = 1) => {
     const updatedCart = await addToCartRequest({ productId, quantity });
     setCart(updatedCart);
-    toast.success("Product added to cart");
+    toast.success(t("toastProductAdded"));
   };
 
   const updateQuantity = async (itemId, quantity) => {
@@ -49,13 +51,13 @@ export const CartProvider = ({ children, isAuthenticated }) => {
   const removeItem = async (itemId) => {
     const updatedCart = await removeCartItemRequest(itemId);
     setCart(updatedCart);
-    toast.success("Item removed");
+    toast.success(t("toastItemRemoved"));
   };
 
   const clearCart = async () => {
     await clearCartRequest();
     await refreshCart();
-    toast.success("Cart cleared");
+    toast.success(t("toastCartCleared"));
   };
 
   const value = useMemo(

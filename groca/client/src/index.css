@@ -5,11 +5,89 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #16A34A;
-  --color-secondary: #22C55E;
-  --color-dark: #166534;
-  --color-bg: #F8FAFC;
-  --color-white: #FFFFFF;
+  --brand-primary: 22 163 74;
+  --brand-secondary: 34 197 94;
+  --brand-dark: 22 101 52;
+  --brand-bg: 248 250 252;
+  --brand-shadow: rgba(22, 101, 52, 0.08);
+  --brand-tint: 34 197 94;
+  --brand-glow: 22 163 74;
+  --surface-card: 255 255 255;
+  --surface-soft: 241 245 249;
+  --surface-border: 203 213 225;
+  --ui-radius-input: 14px;
+  --ui-radius-button: 14px;
+  --ui-radius-card: 20px;
+  --ui-shadow-card: 0 8px 30px var(--brand-shadow);
+  --color-white: 255 255 255;
+}
+
+[data-theme="green"] {
+  --brand-primary: 22 163 74;
+  --brand-secondary: 34 197 94;
+  --brand-dark: 22 101 52;
+  --brand-bg: 248 250 252;
+  --brand-shadow: rgba(22, 101, 52, 0.08);
+  --brand-tint: 34 197 94;
+  --brand-glow: 22 163 74;
+  --surface-card: 255 255 255;
+  --surface-soft: 240 253 244;
+  --surface-border: 187 247 208;
+  --ui-radius-input: 14px;
+  --ui-radius-button: 14px;
+  --ui-radius-card: 20px;
+  --ui-shadow-card: 0 8px 30px rgba(22, 101, 52, 0.08);
+}
+
+[data-theme="ocean"] {
+  --brand-primary: 2 132 199;
+  --brand-secondary: 14 165 233;
+  --brand-dark: 3 105 161;
+  --brand-bg: 247 250 252;
+  --brand-shadow: rgba(3, 105, 161, 0.09);
+  --brand-tint: 125 211 252;
+  --brand-glow: 14 165 233;
+  --surface-card: 255 255 255;
+  --surface-soft: 240 249 255;
+  --surface-border: 186 230 253;
+  --ui-radius-input: 12px;
+  --ui-radius-button: 12px;
+  --ui-radius-card: 18px;
+  --ui-shadow-card: 0 10px 34px rgba(3, 105, 161, 0.12);
+}
+
+[data-theme="sunset"] {
+  --brand-primary: 234 88 12;
+  --brand-secondary: 249 115 22;
+  --brand-dark: 194 65 12;
+  --brand-bg: 255 251 245;
+  --brand-shadow: rgba(194, 65, 12, 0.09);
+  --brand-tint: 253 186 116;
+  --brand-glow: 249 115 22;
+  --surface-card: 255 255 255;
+  --surface-soft: 255 247 237;
+  --surface-border: 254 215 170;
+  --ui-radius-input: 16px;
+  --ui-radius-button: 16px;
+  --ui-radius-card: 24px;
+  --ui-shadow-card: 0 12px 36px rgba(194, 65, 12, 0.13);
+}
+
+[data-theme="berry"] {
+  --brand-primary: 190 24 93;
+  --brand-secondary: 225 29 72;
+  --brand-dark: 157 23 77;
+  --brand-bg: 255 247 250;
+  --brand-shadow: rgba(157, 23, 77, 0.09);
+  --brand-tint: 251 113 133;
+  --brand-glow: 225 29 72;
+  --surface-card: 255 255 255;
+  --surface-soft: 255 241 242;
+  --surface-border: 251 207 232;
+  --ui-radius-input: 12px;
+  --ui-radius-button: 12px;
+  --ui-radius-card: 18px;
+  --ui-shadow-card: 0 12px 34px rgba(157, 23, 77, 0.12);
 }
 
 body {
@@ -17,9 +95,9 @@ body {
   font-family: "Manrope", sans-serif;
   color: #0f172a;
   background:
-    radial-gradient(circle at 5% 5%, rgba(34, 197, 94, 0.18), transparent 45%),
-    radial-gradient(circle at 90% 15%, rgba(22, 163, 74, 0.18), transparent 38%),
-    var(--color-bg);
+    radial-gradient(circle at 5% 5%, rgb(var(--brand-tint) / 0.2), transparent 45%),
+    radial-gradient(circle at 90% 15%, rgb(var(--brand-glow) / 0.2), transparent 38%),
+    rgb(var(--brand-bg));
   min-height: 100vh;
 }
 
@@ -41,17 +119,75 @@ h6 {
 }
 
 .input {
-  @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 placeholder:text-slate-400 shadow-sm outline-none transition duration-200 focus:border-brand-primary focus:ring-2 focus:ring-green-100;
+  @apply w-full border px-4 py-3 text-sm text-slate-700 placeholder:text-slate-400 shadow-sm outline-none transition duration-200 focus:border-brand-primary focus:ring-2 focus:ring-brand-secondary/25;
+  border-radius: var(--ui-radius-input);
+  border-color: rgb(var(--surface-border));
+  background: rgb(var(--surface-card));
 }
 
 .btn-primary {
-  @apply rounded-xl bg-brand-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-dark;
+  @apply bg-brand-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-dark;
+  border-radius: var(--ui-radius-button);
 }
 
 .btn-secondary {
-  @apply rounded-xl border border-brand-primary bg-white px-5 py-2.5 text-sm font-semibold text-brand-dark transition hover:bg-green-50;
+  @apply border border-brand-primary px-5 py-2.5 text-sm font-semibold text-brand-dark transition hover:bg-brand-secondary/10;
+  border-radius: var(--ui-radius-button);
+  background: rgb(var(--surface-card));
 }
 
 .card {
-  @apply rounded-2xl border border-green-50 bg-white shadow-soft;
+  @apply border border-brand-secondary/15;
+  border-radius: var(--ui-radius-card);
+  background: rgb(var(--surface-card));
+  box-shadow: var(--ui-shadow-card);
+}
+
+.theme-chip {
+  @apply rounded-full border border-slate-200 px-2 py-1 text-xs font-semibold text-slate-700 transition hover:border-brand-primary hover:text-brand-dark;
+}
+
+.theme-chip-active {
+  @apply border-brand-primary bg-brand-primary text-white;
+}
+
+.page-shell {
+  position: relative;
+}
+
+.page-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(130deg, rgb(var(--brand-primary) / 0.05), transparent 45%, rgb(var(--brand-secondary) / 0.05));
+  z-index: -1;
+}
+
+.page-main {
+  background: rgb(var(--surface-card) / 0.35);
+  border: 1px solid rgb(var(--surface-border) / 0.4);
+  border-radius: calc(var(--ui-radius-card) + 4px);
+  backdrop-filter: blur(3px);
+}
+
+.admin-shell {
+  background: rgb(var(--brand-bg));
+}
+
+.admin-aside {
+  background: rgb(var(--surface-card));
+  border-color: rgb(var(--surface-border));
+}
+
+.admin-nav-item {
+  border-radius: calc(var(--ui-radius-button) - 2px);
+}
+
+.admin-nav-item:hover {
+  background: rgb(var(--brand-secondary) / 0.12);
+}
+
+.admin-nav-item-active {
+  background: rgb(var(--brand-secondary) / 0.18);
 }

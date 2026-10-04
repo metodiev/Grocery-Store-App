@@ -17,6 +17,9 @@ This repository includes:
 - Tailwind CSS
 - Axios
 - React Context API (auth + cart)
+- Built-in EN/BG language switcher (Bulgarian support)
+- Multi-theme UI switcher (Green, Ocean, Sunset, Berry)
+- Theme-aware core component styles (cards, buttons, inputs, layout shell)
 
 ### Backend
 - Node.js

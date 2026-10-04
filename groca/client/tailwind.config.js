@@ -5,14 +5,14 @@ export default {
     extend: {
       colors: {
         brand: {
-          primary: "#16A34A",
-          secondary: "#22C55E",
-          dark: "#166534",
-          bg: "#F8FAFC"
+          primary: "rgb(var(--brand-primary) / <alpha-value>)",
+          secondary: "rgb(var(--brand-secondary) / <alpha-value>)",
+          dark: "rgb(var(--brand-dark) / <alpha-value>)",
+          bg: "rgb(var(--brand-bg) / <alpha-value>)"
         }
       },
       boxShadow: {
-        soft: "0 8px 30px rgba(22, 101, 52, 0.08)"
+        soft: "0 8px 30px var(--brand-shadow)"
       }
     }
   },

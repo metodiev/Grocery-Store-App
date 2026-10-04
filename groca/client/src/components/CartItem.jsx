@@ -1,6 +1,9 @@
 import PriceDisplay from "./PriceDisplay";
+import { useLanguage } from "../hooks/useLanguage";
 
 const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => {
+  const { t } = useLanguage();
+
   return (
     <div className="card flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-4">
@@ -20,7 +23,7 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => {
           +
         </button>
         <button className="rounded-lg border border-red-100 px-3 py-1 text-red-600" onClick={onRemove} type="button">
-          Remove
+          {t("remove")}
         </button>
       </div>
     </div>

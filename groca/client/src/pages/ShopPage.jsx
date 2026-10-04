@@ -3,10 +3,12 @@ import { useSearchParams } from "react-router-dom";
 
 import Pagination from "../components/Pagination";
 import ProductGrid from "../components/ProductGrid";
+import { useLanguage } from "../hooks/useLanguage";
 import { getCategoriesRequest } from "../services/categoryService";
 import { getProductsRequest } from "../services/productService";
 
 const ShopPage = () => {
+  const { t } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -60,12 +62,12 @@ const ShopPage = () => {
   return (
     <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
       <aside className="card h-fit space-y-4 p-4">
-        <h3 className="text-lg font-bold text-slate-800">Filters</h3>
+        <h3 className="text-lg font-bold text-slate-800">{t("filters")}</h3>
 
         <div>
-          <label className="mb-1 block text-xs font-semibold uppercase text-slate-500">Category</label>
+          <label className="mb-1 block text-xs font-semibold uppercase text-slate-500">{t("category")}</label>
           <select className="input" value={filters.category} onChange={(event) => updateFilter("category", event.target.value)}>
-            <option value="">All categories</option>
+            <option value="">{t("allCategories")}</option>
             {categories.map((category) => (
               <option key={category.id} value={category.slug}>
                 {category.name}
@@ -76,7 +78,7 @@ const ShopPage = () => {
 
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <label className="mb-1 block text-xs font-semibold uppercase text-slate-500">Min price</label>
+            <label className="mb-1 block text-xs font-semibold uppercase text-slate-500">{t("minPrice")}</label>
             <input
               className="input"
               min="0"
@@ -86,7 +88,7 @@ const ShopPage = () => {
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-semibold uppercase text-slate-500">Max price</label>
+            <label className="mb-1 block text-xs font-semibold uppercase text-slate-500">{t("maxPrice")}</label>
             <input
               className="input"
               min="0"
@@ -98,18 +100,18 @@ const ShopPage = () => {
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-semibold uppercase text-slate-500">Sort</label>
+          <label className="mb-1 block text-xs font-semibold uppercase text-slate-500">{t("sort")}</label>
           <select className="input" value={filters.sort} onChange={(event) => updateFilter("sort", event.target.value)}>
-            <option value="newest">Newest</option>
-            <option value="price_asc">Price low to high</option>
-            <option value="price_desc">Price high to low</option>
-            <option value="name_asc">Name A-Z</option>
+            <option value="newest">{t("newest")}</option>
+            <option value="price_asc">{t("priceLowHigh")}</option>
+            <option value="price_desc">{t("priceHighLow")}</option>
+            <option value="name_asc">{t("nameAZ")}</option>
           </select>
         </div>
       </aside>
 
       <div className="space-y-6">
-        <ProductGrid loading={loading} products={products} title="All grocery products" />
+        <ProductGrid loading={loading} products={products} title={t("allGroceryProducts")} />
         <Pagination page={pagination.page || 1} totalPages={pagination.totalPages || 1} onChange={(page) => updateFilter("page", String(page))} />
       </div>
     </div>

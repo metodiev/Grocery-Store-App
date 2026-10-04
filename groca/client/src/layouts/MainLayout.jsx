@@ -14,7 +14,7 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="page-shell min-h-screen">
       <Header
         onSearchSubmit={(event) => {
           event.preventDefault();
@@ -22,7 +22,7 @@ const MainLayout = () => {
         search={search}
         setSearch={setSearch}
       />
-      <main className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
+      <main className="page-main mx-auto mt-4 max-w-7xl px-4 py-8 lg:px-8">
         <Outlet />
       </main>
       <Footer />
